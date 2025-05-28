@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #1e1b4b, #312e81);
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: none;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 80vh;
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#game-area {
+    width: 100%;
+    height: calc(100% - 100px);
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.mosquito {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6M2 12h6M12 2v6M12 22v-6M17 12a5 5 0 0 1-5 5M7 12a5 5 0 0 0 5 5"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 0.2s;
+    cursor: none;
+    z-index: 1;
+}
+
+.mosquito.dead {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="5"/><circle cx="9" cy="9" r="2"/><circle cx="15" cy="9" r="5"/><circle cx="15" cy="9" r="2"/><path d="m9 9 6-6"/><path d="m9 9 6 6"/></svg>');
+    animation: fall 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.mosquito.landed {
+    animation: none;
+    transform: translateY(calc(100vh - 120px)) rotate(180deg);
+    opacity: 1;
+}
+
+.mosquito.fade {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(calc(100vh - 120px)) rotate(180deg);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+#crosshair {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>');
+    z-index: 1000;
+}
+
+.game-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    background: #6d28d9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #5b21b6;
+}
+
+button:disabled {
+    background: #4b5563;
+    cursor: not-allowed;
+}
+
+#mosquito-count {
+    margin-left: 20px;
+    font-size: 1.5rem;
+}

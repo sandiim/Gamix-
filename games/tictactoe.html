@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe - Arcade Games</title>
+    <link rel="stylesheet" href="../css/tictactoe.css">
+</head>
+<body>
+    <button class="back-button" onclick="goHome()">← Retour aux Jeux</button>
+    
+    <div class="game-container">
+        <h1>Tic Tac Toe</h1>
+        <div class="status" id="status">Joueur X commence</div>
+        <div class="board" id="board">
+            <button class="cell" data-cell></button>
+            <button class="cell" data-cell></button>
+            <button class="cell" data-cell></button>
+            <button class="cell" data-cell></button>
+            <button class="cell" data-cell></button>
+            <button class="cell" data-cell></button>
+            <button class="cell" data-cell></button>
+            <button class="cell" data-cell></button>
+            <button class="cell" data-cell></button>
+        </div>
+        <button id="restart-btn">Recommencer</button>
+    </div>
+
+    <script src="../js/tictactoe.js"></script>
+</body>
+</html>

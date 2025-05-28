@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game - Arcade Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="../images/snake-icon.png" type="image/png">
+    <link rel="stylesheet" href="../css/snake.css">
+</head>
+<body>
+    <button class="back-button" onclick="goHome()">← Retour aux Jeux</button>
+    
+    <div class="game-container">
+        <h1>Snake Game</h1>
+        <div class="game-info">
+            <span>Score: <span id="score">0</span></span>
+            <span>Meilleur Score: <span id="bestScore">0</span></span> <!-- Afficher le meilleur score -->
+            <button id="start-btn">Démarrer</button>
+        </div>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+    </div>
+
+    <script src="../js/snake.js"></script>
+</body>
+</html>

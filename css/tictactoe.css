@@ -1,0 +1,124 @@
+/* Styles généraux */
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f2f5;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* Bouton retour */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #34495e;
+}
+
+/* Container du jeu */
+.game-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.game-container h1 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+/* Statut du jeu */
+.status {
+    margin: 20px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Plateau de jeu */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 5px;
+    background-color: #2c3e50;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+/* Cellules du jeu */
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cell:hover {
+    background-color: #f0f0f0;
+}
+
+.cell.x {
+    color: #e74c3c;
+}
+
+.cell.o {
+    color: #3498db;
+}
+
+/* Bouton recommencer */
+#restart-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#restart-btn:hover {
+    background-color: #34495e;
+}
+
+/* Message de victoire */
+.win-message {
+    font-size: 2rem;
+    color: #27ae60;
+    margin-top: 20px;
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+    .board {
+        grid-template-columns: repeat(3, 80px);
+        gap: 3px;
+    }
+
+    .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu Basketball</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+
+        .game-container {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            background-color: #f0f0f0;
+            border: 2px solid #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .hoop {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            width: 100px;
+            height: 10px;
+            background-color: aqua;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .ball {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: palevioletred;
+            border-radius: 50%;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: grab;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .ball:active {
+            cursor: grabbing;
+        }
+
+        .emoji {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            display: none;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+
+        .score {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        .timer {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="hoop"></div>
+        <div class="ball" draggable="false"></div>
+        <div class="emoji" id="emoji" aria-hidden="true">😊</div>
+    </div>
+
+    <div class="score">Score: <span id="score">0</span></div>
+    <div class="timer">Time: <span id="timer">30</span> sec</div>
+
+    <button class="back-button" onclick="window.location.href='../index.html';">Retour à l'accueil</button>
+
+    <script>
+        const ball = document.querySelector('.ball');
+        const hoop = document.querySelector('.hoop');
+        const emoji = document.getElementById('emoji');
+        const scoreElement = document.getElementById('score');
+        const timerElement = document.getElementById('timer');
+
+        let score = 0;
+        let timer = 30;
+        let isDragging = false;
+        let velocityX = 0;
+        let velocityY = 0;
+        let gameInterval;
+
+        // Start a timer
+        function startTimer() {
+            gameInterval = setInterval(() => {
+                if (timer > 0) {
+                    timer--;
+                    timerElement.textContent = `${timer} sec`;
+                } else {
+                    clearInterval(gameInterval);
+                    alert('Temps écoulé ! Votre score final est : ' + score);
+                }
+            }, 1000);
+        }
+
+        // Move the ball based on velocity
+        function moveBall() {
+            const gameContainer = document.querySelector('.game-container');
+            const containerRect = gameContainer.getBoundingClientRect();
+            const ballRect = ball.getBoundingClientRect();
+
+            let newX = ballRect.left + velocityX;
+            let newY = ballRect.top + velocityY;
+
+            // Handle ball boundary
+            if (newX <= containerRect.left || newX + ball.offsetWidth >= containerRect.right) {
+                velocityX = 0;  // Stop horizontal movement
+            }
+
+            if (newY <= containerRect.top || newY + ball.offsetHeight >= containerRect.bottom) {
+                velocityY = 0;  // Stop vertical movement
+            }
+
+            // Update ball position
+            ball.style.left = `${newX - containerRect.left}px`;
+            ball.style.top = `${newY - containerRect.top}px`;
+
+            // Check for collision with the hoop
+            checkCollision();
+        }
+
+        // Handle collision with the hoop
+        function checkCollision() {
+            const ballRect = ball.getBoundingClientRect();
+            const hoopRect = hoop.getBoundingClientRect();
+
+            if (
+                ballRect.bottom >= hoopRect.top &&
+                ballRect.top <= hoopRect.bottom &&
+                ballRect.right >= hoopRect.left &&
+                ballRect.left <= hoopRect.right
+            ) {
+                score++;
+                scoreElement.textContent = score;
+                showEmoji();
+            }
+        }
+
+        // Show emoji after scoring
+        function showEmoji() {
+            emoji.style.display = 'block';
+            emoji.style.opacity = '1';
+
+            setTimeout(() => {
+                emoji.style.opacity = '0';
+                setTimeout(() => {
+                    emoji.style.display = 'none';
+                }, 300);
+            }, 1000);
+        }
+
+        // Start the game
+        startTimer();
+
+        // Start dragging the ball
+        ball.addEventListener('mousedown', (e) => {
+            isDragging = true;
+        });
+
+        // Stop dragging and shoot the ball
+        document.addEventListener('mouseup', (e) => {
+            if (isDragging) {
+                isDragging = false;
+
+                // Calculate direction from the current mouse position
+                const gameContainer = document.querySelector('.game-container');
+                const containerRect = gameContainer.getBoundingClientRect();
+                const mouseX = e.clientX - containerRect.left - ball.offsetWidth / 2;
+                const mouseY = e.clientY - containerRect.top - ball.offsetHeight / 2;
+
+                let deltaX = mouseX - ball.offsetLeft;
+                let deltaY = mouseY - ball.offsetTop;
+
+                // Calculate the direction and speed of the ball
+                const magnitude = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                velocityX = (deltaX / magnitude) * 4;  // Speed factor for horizontal direction
+                velocityY = (deltaY / magnitude) * 7;  // Speed factor for vertical direction
+
+                moveBall(); // Start moving the ball
+            }
+        });
+    </script>
+</body>
+</html>
