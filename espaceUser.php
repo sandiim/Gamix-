@@ -24,14 +24,14 @@ if (!isset($_SESSION['user_id'])) {
         <h1>Gamix</h1>
       </div>
       <ul class="nav-links">
-        <li><a href="index.html">Accueil</a></li>
+        <li><a href="#hero">Accueil</a></li>
         <li><a href="logout.php">Déconnexion</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- Section de bienvenue -->
-  <main class="hero" style="margin-top: 120px;">
+  <main class="hero" id="hero" style="margin-top: 120px;">
     <div class="hero-content">
       <h2>Bienvenue <?= htmlspecialchars($_SESSION['username']) ?> 👋</h2>
       <p>Ceci est votre espace personnel sécurisé sur Gamix Arcade.<br>Amusez-vous avec nos jeux exclusifs !</p>
