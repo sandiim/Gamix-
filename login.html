@@ -14,9 +14,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="./index.html" >Accueil</a></li>
-                <li><a href="#games">Jeux</a></li>
                 <li><a href="./login.html" class="active">Connecter</a></li>
-                <li><a href="./registre.html">Inscription</a></li>
                 <li><a href="#leaderboard">Classement</a></li>
                 <li><a href="#about">À propos</a></li>
             </ul>
@@ -28,6 +26,9 @@
         <div class="form-box">
             <h2>Connexion</h2>
             <form>
+
+                <div id="message" style="color: green; font-weight: bold; margin: 10px 0;"></div>
+
                 <div class="field">
                     <label for="email">Email</label>
                     <input type="email" id="email" placeholder="Votre email" required>
@@ -41,6 +42,14 @@
             <p>Pas encore de compte ? <a href="./registre.html">Inscrivez-vous</a>.</p>
         </div>
     </main>
+
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('register') === 'success') {
+    document.getElementById('message').textContent = "Inscription réussie, vous pouvez maintenant vous connecter.";
+  }
+</script>
 
     <footer class="footer">
         <p>&copy; 2025 Gamix - Tous droits réservés</p>

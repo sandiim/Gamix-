@@ -1,53 +1,194 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
-    <link rel="stylesheet" href="./css/forms.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription</title>
+  <link rel="stylesheet" href="./css/forms.css" />
+  <style>
+    #password-strength {
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+    #password-strength.weak {
+      color: red;
+    }
+    #password-strength.medium {
+      color: orange;
+    }
+    #password-strength.strong {
+      color: green;
+    }
+  </style>
+  <script>
+    function validatePasswords(event) {
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
+      const email = document.getElementById("email").value;
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.(com|fr|net|org)$/;
+
+      if (!emailRegex.test(email)) {
+        event.preventDefault();
+        alert("Veuillez entrer une adresse email valide.");
+        return false;
+      }
+
+      if (password !== confirmPassword) {
+        event.preventDefault();
+        alert("Les mots de passe ne correspondent pas.");
+        return false;
+      }
+
+      return true;
+    }
+
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById("password");
+      const confirmInput = document.getElementById("confirm-password");
+      const type = passwordInput.type === "password" ? "text" : "password";
+      passwordInput.type = type;
+      confirmInput.type = type;
+    }
+
+    function checkPasswordStrength() {
+      const password = document.getElementById("password").value;
+      const strengthText = document.getElementById("password-strength");
+
+      let strength = 0;
+      if (password.length >= 6) strength++;
+      if (/[A-Z]/.test(password)) strength++;
+      if (/[0-9]/.test(password)) strength++;
+      if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+      switch (strength) {
+        case 0:
+        case 1:
+          strengthText.textContent = "Force : faible";
+          strengthText.className = "weak";
+          break;
+        case 2:
+        case 3:
+          strengthText.textContent = "Force : moyenne";
+          strengthText.className = "medium";
+          break;
+        case 4:
+          strengthText.textContent = "Force : forte";
+          strengthText.className = "strong";
+          break;
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("register-form");
+      form.addEventListener("submit", validatePasswords);
+      document.getElementById("password").addEventListener("input", checkPasswordStrength);
+    });
+  </script>
 </head>
 <body>
-    <header class="main-header">
-        <nav class="nav-container">
-            <div class="logo">
-                <h1>Gamix</h1>
-            </div>
-            <ul class="nav-links">
-                <li><a href="./index.html" >Accueil</a></li>
-                <li><a href="#games">Jeux</a></li>
-                <li><a href="./login.html">Connecter</a></li>
-                <li><a href="./registre.html" class="active">Inscription</a></li>
-                <li><a href="#leaderboard">Classement</a></li>
-                <li><a href="#about">À propos</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header class="main-header">
+    <nav class="nav-container">
+      <div class="logo">
+        <h1>Gamix</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="./index.html">Accueil</a></li>
+        <li><a href="./login.html">Connecter</a></li>
+        <li><a href="#leaderboard">Classement</a></li>
+        <li><a href="#about">À propos</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <!-- Formulaire d'Inscription -->
-        <div class="form-box">
-            <h2>Inscription</h2>
-            <form>
-                <div class="field">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Votre email" required>
-                </div>
-                <div class="field">
-                    <label for="username">Nom d'utilisateur</label>
-                    <input type="text" id="username" placeholder="Votre nom d'utilisateur" required>
-                </div>
-                <div class="field">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" id="password" placeholder="Votre mot de passe" required>
-                </div>
-                <button type="submit" class="btn">S'inscrire</button>
-            </form>
-            <p>Déjà un compte ? <a href="login.html">Connectez-vous</a>.</p>
+  <main>
+    <div class="form-box">
+      <h2>Inscription</h2>
+      <form id="register-form" method="POST" action="registre.php">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Votre email" required />
         </div>
-    </main>
+        <div class="field">
+          <label for="username">Nom d'utilisateur</label>
+          <input type="text" id="username" name="username" placeholder="Votre nom d'utilisateur" required />
+        </div>
+        <div class="field">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" name="password" placeholder="Votre mot de passe" required />
+          <div id="password-strength"></div>
+        </div>
+        <div class="field">
+          <label for="confirm-password">Confirmer le mot de passe</label>
+          <input type="password" id="confirm-password" placeholder="Confirmez le mot de passe" required />
+        </div>
+        <div class="field">
+          <label>
+            <input type="checkbox" onclick="togglePasswordVisibility()" /> Afficher le mot de passe
+          </label>
+        </div>
+        <button type="submit" class="btn">S'inscrire</button>
+      </form>
+      <p>Déjà un compte ? <a href="login.html">Connectez-vous</a>.</p>
+    </div>
+  </main>
 
-    <footer class="footer">
-        <p>&copy; 2025 Gamix - Tous droits réservés</p>
-    </footer>
+  <footer class="footer">
+    <p>&copy; 2025 Gamix - Tous droits réservés</p>
+  </footer>
+
+
+  <script>
+    const form = document.getElementById('register-form');
+    const emailInput = document.getElementById('email');
+    const usernameInput = document.getElementById('username');
+    const errorDiv = document.createElement('div');
+    errorDiv.style.color = 'red';
+    errorDiv.style.marginTop = '10px';
+    form.prepend(errorDiv);
+  
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Bloquer la soumission normale
+  
+      errorDiv.textContent = ''; // Reset erreur
+  
+      const email = emailInput.value.trim();
+      const username = usernameInput.value.trim();
+  
+      // Validation simple email/username vide
+      if (!email || !username) {
+        errorDiv.textContent = 'Email et nom d’utilisateur sont requis.';
+        return;
+      }
+  
+      // Requête AJAX vers check_user.php
+      fetch(`check_user.php?email=${encodeURIComponent(email)}&username=${encodeURIComponent(username)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            errorDiv.textContent = data.error;
+            return;
+          }
+  
+          if (data.emailExists) {
+            errorDiv.textContent = "L'email est déjà utilisé.";
+            return;
+          }
+  
+          if (data.usernameExists) {
+            errorDiv.textContent = "Le nom d'utilisateur est déjà utilisé.";
+            return;
+          }
+  
+          // Si tout est OK, on peut soumettre le formulaire normalement
+          form.removeEventListener('submit', arguments.callee);
+          form.submit();
+        })
+        .catch(() => {
+          errorDiv.textContent = 'Erreur lors de la vérification, veuillez réessayer.';
+        });
+    });
+  </script>
+
+  
 </body>
 </html>
