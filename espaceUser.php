@@ -14,6 +14,7 @@ if (!isset($_SESSION['user_id'])) {
   <title>Espace Utilisateur - Gamix</title>
   <link rel="stylesheet" href="./css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
@@ -38,6 +39,9 @@ if (!isset($_SESSION['user_id'])) {
       <a href="#games" class="cta-button">Découvrir les jeux</a>
     </div>
   </main>
+
+  <!-- Historique des parties -->
+<?php include 'historique.php'; ?>
 
   <!-- Section des jeux -->
   <section id="games" class="games-section">
