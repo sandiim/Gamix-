@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory card - Gamix</title>
+    <!-- Assurez-vous que le chemin vers memory.css est correct -->
+    <link rel="stylesheet" href="../css/style.css"> 
+    <!-- Lien pour la police Orbitron (si non disponible localement) -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <style>
+    *{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+
+}
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #6563ff;
+}
+.memory{
+    height: 400px;
+    width: 400px;
+    background: #f8f8f8;
+    border-radius: 10px;
+}
+
+.card  .back img {
+     max-width: 45px; 
+}
+
+
+.game, .card, .view{
+    /*faire image horizontal*/
+    display: flex;
+    align-items: center;
+    /*faire image dans le center*/
+    justify-content: center;
+}
+.game{
+    height:100% ;
+    width:100%;
+    /*faire tous les images dans des lignes*/
+    flex-wrap:wrap;
+    /*espace entre image*/
+    justify-content: space-between;
+    padding: 25px;
+}
+
+.game .card{
+    cursor:pointer;
+    /**/
+    position:relative;
+    perspective: 800px;
+    /* convertir en 3d*/
+    transform-style: preserve-3d;
+    /**/
+    height: calc(100% / 4 - 10px);
+    width: calc(100% / 4 - 10px);
+}
+
+.game .card .view{
+    width: 100%;
+    height: 100%;
+    background:#fff;
+    border-radius: 7px;
+    /*faire box pour chaque image*/
+    box-shadow: 0 3px 10px rgba(0,0,0,1);
+    /* pour suprimer ? et image*/
+    position:absolute;
+    /**/
+    transition: transform 0.25s linear;
+    /* pour affiche ? et aussi emoji*/
+backface-visibility: hidden;
+
+/*script*/
+pointer-events: none;
+user-select: none;
+
+}
+
+.card .shake{
+    animation: shake 0.35s ease-in-out;
+}
+
+@keyframes shake {
+    0% ,100% {
+        transform: translateX(0);
+    }
+    20%{
+        transform: translateX(-13px);
+    }
+    40%{
+        transform: translateX(13px);
+    }
+    60%{
+        transform: translateX(-8px);
+    }
+    80%{
+        transform: translateX(8px);
+    }
+}
+.card .font span{
+    font-size: 43px;
+}
+ 
+.card .back{
+    /*retourne la face arriere*/
+transform: rotateY(-180deg);
+
+}
+
+
+.card.flip .back{
+    transform: rotateY(0);
+}
+.card.flip.font{
+    transform: rotateY(180deg);
+}
+
+/* Style pour le bouton de retour */
+.back-button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.back-button:hover {
+    background-color: #2980b9;
+}</style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <h1>Gamix</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../espaceUser.php" class='active'>Accueil</a></li>
+                <li><a href="historique.php">Historique de vos parties</a></li> 
+                <li><a href="../editUser.php">Éditer profil</a></li>
+                <li><a href="../logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="game-status">
+            Temps écoulé: <span id="timer-display">00 min 00 sec</span>
+        </div>
+
+        <div class="memory">
+            <ul class="game">
+                <!-- Les 16 <li class="card"> seront générés par JS ou hardcodés comme ici -->
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img1.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img2.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img3.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img4.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img5.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img6.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img7.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img8.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img1.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img2.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img3.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img4.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img5.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img6.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img7.jpeg" alt="Card Image"></div>
+                </li>
+                <li class="card">
+                    <div class="view font"><span>?</span></div>
+                    <div class="view back"><img src="../assets/images/img8.jpeg" alt="Card Image"></div>
+                </li>
+            </ul>
+        </div>
+         <div class="controls">
+           
+            
+        </div>
+        <button class="back-button" onclick="window.location.href='../espaceUser.php'">Retour à l'accueil</button>
+    </main>
+
+    <!-- Assurez-vous que le chemin vers script.js est correct -->
+    <script src="../js/script.js"></script> 
+</body>
+</html>

@@ -18,7 +18,6 @@
         <li><a href="#home" class="active">Accueil</a></li>
         <li><a href="#games">Jeux</a></li>
         <li><a href="./login.html">Connecter</a></li>
-        <li><a href="#leaderboard">Classement</a></li>
         <li><a href="./apropos.html">À propos</a></li>
       </ul>
     </nav>
@@ -33,6 +32,27 @@
       </div>
     </section>
 
+    <!-- Section Statistiques -->
+    <section class="stats-section">
+      <div class="stats-container">
+        <div class="stat-card">
+          <i class="fas fa-gamepad"></i>
+          <h3>Jeux Disponibles</h3>
+          <p class="stat-number">5</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-users"></i>
+          <h3>Visiteurs Totaux</h3>
+          <p class="stat-number">1506</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-star"></i>
+          <h3>Note Moyenne</h3>
+          <p class="stat-number">4,8</p>
+        </div>
+      </div>
+    </section>
+
     <section id="games" class="games-section">
       <h2>Nos Jeux</h2>
       <div class="games-grid">
@@ -43,7 +63,7 @@
           <div class="game-content">
             <h3>Tic Tac Toe</h3>
             <p>Le célèbre jeu de morpion. Alignez trois symboles pour gagner !</p>
-            <a href="games/tictactoe.html" class="play-btn">Jouer</a>
+            <a href="games/tictactoe.php" class="play-btn">Jouer</a>
           </div>
         </div>
         <div class="game-card">
@@ -53,7 +73,7 @@
           <div class="game-content">
             <h3>Memory Game</h3>
             <p>Testez votre mémoire en trouvant les paires correspondantes.</p>
-            <a href="./projet web 2025/Build A Memory Card.html" class="play-btn">Jouer</a>
+            <a href="./games/memory.html" class="play-btn">Jouer</a>
           </div>
         </div>
         <div class="game-card">
@@ -68,12 +88,12 @@
         </div>
         <div class="game-card">
           <div class="game-image">
-            <img src="./assets/basket.png" alt="Basketball Game" loading="lazy">
+            <img src="./assets/Jeu-pierre-feuille-ciseaux.webp" alt="Basketball Game" loading="lazy">
           </div>
           <div class="game-content">
-            <h3>Basketball</h3>
-            <p>Lancer le ballon pour marquer des buts</p>
-            <a href="./games/jeu bask.html" class="play-btn">Jouer</a>
+            <h3>Pierre - Feuille - Ciseaux</h3>
+            <p>Choisir Pierre ou Feuille ou Ciseaux</p>
+            <a href="./games/feuille.html" class="play-btn">Jouer</a>
           </div>
         </div>
         <div class="game-card">
@@ -83,9 +103,58 @@
           <div class="game-content">
             <h3>Mosquitos Hunter</h3>
             <p>Chasse les mosquitos pour gagner des points</p>
-            <a href="./games/mosquito.html" class="play-btn">Jouer</a>
+            <a href="./games/mosquito.php" class="play-btn">Jouer</a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Section Avis Approuvés -->
+    <section class="approved-feedback-section">
+        <div class="approved-feedback-container">
+            <h2 class="approved-feedback-title">
+            </h2>
+            <div id="approved-feedback-content">
+                <!-- Le contenu sera chargé dynamiquement -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Feedback -->
+    <section class="feedback-section" id="feedback">
+      <h2>Partagez votre avis</h2>
+      <div class="feedback-container">
+        <form id="feedback-form" action="./process_feedback.php" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" name="nom" required placeholder="Votre nom">
+            </div>
+            <div class="form-group">
+              <label for="prenom">Prénom</label>
+              <input type="text" id="prenom" name="prenom" required placeholder="Votre prénom">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Votre email">
+          </div>
+          <div class="form-group">
+            <label for="note">Note</label>
+            <div class="rating">
+              <input type="radio" name="note" value="5" id="5"><label for="5">☆</label>
+              <input type="radio" name="note" value="4" id="4"><label for="4">☆</label>
+              <input type="radio" name="note" value="3" id="3"><label for="3">☆</label>
+              <input type="radio" name="note" value="2" id="2"><label for="2">☆</label>
+              <input type="radio" name="note" value="1" id="1"><label for="1">☆</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="commentaire">Votre commentaire</label>
+            <textarea id="commentaire" name="commentaire" rows="4" required placeholder="Partagez votre expérience avec nous..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Envoyer mon avis</button>
+        </form>
       </div>
     </section>
   </main>
@@ -94,5 +163,292 @@
     <p>&copy; 2025 Gamix - Tous droits réservés</p>
   </footer>
 
+  <!-- Ajout de Font Awesome pour les icônes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <style>
+    /* Styles pour la section statistiques */
+    .stats-section {
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content:center;
+
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      min-width: 200px;
+      transition: transform 0.3s ease;
+      margin: 3rem;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .stat-card i {
+      font-size: 2.5rem;
+      color: #4a90e2;
+      margin-bottom: 1rem;
+    }
+
+    .stat-card h3 {
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #4a90e2;
+    }
+
+    /* Styles pour la section feedback */
+    .feedback-section {
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #fff;
+    }
+
+    .feedback-section h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #fff;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .feedback-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #fff;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #4a90e2;
+      box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .rating {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
+
+    .rating input {
+      display: none;
+    }
+
+    .rating label {
+      cursor: pointer;
+      font-size: 2.5rem;
+      color: #ddd;
+      transition: all 0.3s ease;
+    }
+
+    .rating input:checked ~ label,
+    .rating label:hover,
+    .rating label:hover ~ label {
+      color: #ffd700;
+      transform: scale(1.1);
+    }
+
+    .submit-btn {
+      background: linear-gradient(45deg, #4a90e2, #63b3ed);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(45deg, #357abd, #4a90e2);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .feedback-container {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+    }
+
+    /* Styles pour la section des avis approuvés */
+    .approved-feedback-section {
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: #fff;
+    }
+
+    .approved-feedback-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .approved-feedback-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    #approved-feedback-content {
+        min-height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #approved-feedback-content.loading {
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="%234a90e2" stroke-width="8" fill="none"/></svg>') center no-repeat;
+        background-size: 50px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        100% { transform: rotate(360deg); }
+    }
+  </style>
+
+  <script>
+    // Animation des nombres
+    function animateNumbers() {
+      const stats = document.querySelectorAll('.stat-number');
+      stats.forEach(stat => {
+        const target = parseInt(stat.textContent);
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            stat.textContent = target;
+            clearInterval(timer);
+          } else {
+            stat.textContent = Math.floor(current);
+          }
+        }, 40);
+      });
+    }
+
+    // Observer pour déclencher l'animation quand la section est visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateNumbers();
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const statsSection = document.querySelector('.stats-section');
+      observer.observe(statsSection);
+    });
+
+    // Fonction pour charger les avis approuvés
+    function loadApprovedFeedback() {
+        const container = document.getElementById('approved-feedback-content');
+        container.classList.add('loading');
+
+        fetch('approved_feedback.php')
+            .then(response => response.text())
+            .then(html => {
+                container.classList.remove('loading');
+                container.innerHTML = html;
+            })
+            .catch(error => {
+                container.classList.remove('loading');
+                container.innerHTML = '<p class="text-center">Impossible de charger les avis pour le moment.</p>';
+                console.error('Erreur lors du chargement des avis:', error);
+            });
+    }
+
+    // Charger les avis au chargement de la page
+    document.addEventListener('DOMContentLoaded', function() {
+        loadApprovedFeedback();
+    });
+  </script>
 </body>
 </html>

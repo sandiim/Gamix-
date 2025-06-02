@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pierre-Feuille-Ciseaux - Gamix</title>
+    <link rel="stylesheet" href="../css/style.css"> <!-- Styles généraux du site -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            flex-direction: column; /* Pour l'en-tête et le contenu principal */
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .game-container-pfc {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            text-align: center;
+            margin-top: 20px; /* Espace après l'en-tête */
+            max-width: 600px;
+            width: 90%;
+        }
+        h2 {
+            color: #6563ff; /* Couleur du jeu Memory */
+            font-family: 'Orbitron', sans-serif;
+        }
+        .choices button {
+            background-color: #6563ff;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+        .choices button:hover {
+            background-color: #4a48cc;
+        }
+        .results, .score {
+            margin-top: 25px;
+            font-size: 1.1em;
+        }
+        .results p, .score p {
+            margin: 8px 0;
+        }
+        #player-choice, #computer-choice, #round-result {
+            font-weight: bold;
+        }
+        #round-result.win { color: green; }
+        #round-result.lose { color: red; }
+        #round-result.tie { color: orange; }
+
+        #game-status-pfc {
+            margin-top: 15px;
+            font-size: 1em;
+            color: #555;
+        }
+        .action-buttons {
+            margin-top: 30px;
+        }
+        .action-buttons button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 0 10px;
+        }
+        .action-buttons button:hover {
+            background-color: #218838;
+        }
+         .back-button-pfc {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px; /* Espace par rapport au contenu du jeu */
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button-pfc:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <h1>Gamix</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../espaceUser.php">Accueil</a></li>
+                <li><a href="historique.php">Historique de vos parties</a></li>
+                <li><a href="../editUser.php">Éditer profil</a></li>
+                <li><a href="../logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="game-container-pfc">
+        <h2>Pierre - Feuille - Ciseaux</h2>
+
+        <div id="game-status-pfc">
+            Temps de jeu: <span id="timer-display-pfc">00 min 00 sec</span>
+        </div>
+
+        <div class="choices">
+            <button data-choice="pierre">✊ Pierre</button>
+            <button data-choice="feuille">✋ Feuille</button>
+            <button data-choice="ciseaux">✌️ Ciseaux</button>
+        </div>
+
+        <div class="results">
+            <p>Votre choix: <span id="player-choice">-</span></p>
+            <p>Choix de l'ordinateur: <span id="computer-choice">-</span></p>
+            <p>Résultat: <span id="round-result">-</span></p>
+        </div>
+
+        <div class="score">
+            <p>Score: Joueur <span id="player-score">0</span> - <span id="computer-score">0</span> Ordinateur</p>
+        </div>
+
+        <div class="action-buttons">
+            <button id="save-game-pfc">Terminer & Sauvegarder la Partie</button>
+        </div>
+         <button class="back-button-pfc" onclick="window.location.href='../espaceUser.php';">Retour à l'accueil</button>
+    </main>
+
+    <script src="../js/feuille.js"></script>
+</body>
+</html>

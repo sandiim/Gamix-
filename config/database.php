@@ -17,4 +17,4 @@ try {
     // En cas d'erreur de connexion
     die("Erreur de connexion : " . $e->getMessage());
 }
-?> 
+?>

@@ -2,24 +2,146 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game - Arcade Games</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="../images/snake-icon.png" type="image/png">
-    <link rel="stylesheet" href="../css/snake.css">
+    <title>Jeu Snake - Gamix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0ff1ce;
+            --primary-dark: #0c7b93;
+            --secondary: #ff4081;
+            --background: #1a1a2e;
+            --text: #f8f8f8;
+            --text-secondary: #9ca3af;
+            --card-bg: rgba(255, 255, 255, 0.06);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--background), #0f3460);
+            color: var(--text);
+            min-height: 100vh;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .dashboard-container {
+            padding: 120px 20px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        #gameCanvas {
+            border: 3px solid var(--primary);
+            background-color: #171717;
+            box-shadow: 0 0 25px var(--primary);
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .controls {
+            margin: 25px 0;
+        }
+
+        .game-button {
+            padding: 12px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: var(--primary);
+            color: #171717;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            margin: 10px;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .game-button:hover {
+            background-color: var(--primary-dark);
+            box-shadow: 0 0 20px var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .score-board {
+            font-size: 22px;
+            margin: 25px 0;
+            color: var(--primary);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .score-board span {
+            font-weight: bold;
+            color: white;
+            margin-left: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding-top: 100px;
+            }
+            
+            #gameCanvas {
+                width: 100%;
+                height: auto;
+                max-width: 400px;
+                max-height: 400px;
+            }
+            
+            .score-board {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <button class="back-button" onclick="goHome()">← Retour aux Jeux</button>
+    <!-- Navbar -->
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <h1>Gamix</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../espaceUser.php" class='active'>Accueil</a></li>
+                <li><a href="historique.php">Historique de vos parties</a></li> 
+                   <li><a href="../editUser.php">Éditer profil</a></li>
+                <li><a href="../logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
     
-    <div class="game-container">
-        <h1>Snake Game</h1>
-        <div class="game-info">
-            <span>Score: <span id="score">0</span></span>
-            <span>Meilleur Score: <span id="bestScore">0</span></span> <!-- Afficher le meilleur score -->
-            <button id="start-btn">Démarrer</button>
-        </div>
+    <main class="dashboard-container">
+        <h1 class="dashboard-title">
+            <i class="fas fa-gamepad"></i> SNAKE
+        </h1>
+        
         <canvas id="gameCanvas" width="400" height="400"></canvas>
-    </div>
+
+        <div class="controls">
+            <button id="start-btn" class="game-button">Démarrer le Jeu</button>
+            <button class="game-button nav-button" onclick="window.location.href='../espaceUser.php'">
+                <i class="fas fa-home"></i> Accueil
+            </button>
+        </div>
+
+        <div class="score-board">
+            <div>Score: <span id="score">0</span></div>
+            <div>Meilleur Score: <span id="bestScore">0</span></div>
+        </div>
+    </main>
 
     <script src="../js/snake.js"></script>
 </body>
